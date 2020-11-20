@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.boymask.training.colors.ColorsParameterActivity;
 import com.boymask.training.math.MathActivity;
 import com.boymask.training.math.MathParametersActivity;
 
@@ -98,7 +99,8 @@ public class MainActivity extends AppCompatActivity {
         colori.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MainActivity.this, ColorsParameterActivity.class);
+                startActivity(intent);
             }
         });
 
