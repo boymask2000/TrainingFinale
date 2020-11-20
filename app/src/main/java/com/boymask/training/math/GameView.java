@@ -21,17 +21,19 @@ import com.boymask.training.math.MathActivity;
 import com.boymask.training.math.MathParameters;
 
 import java.util.Random;
+import java.util.Stack;
 
 import static java.lang.Thread.sleep;
 
 public class GameView extends SurfaceView implements Runnable {
+    private PairGenerator pGen;
     private boolean mRunning;
     private Thread mGameThread = null;
     private Path mPath;
 
     private Context mContext;
 
-  //  private FlashlightCone mFlashlightCone;
+    //  private FlashlightCone mFlashlightCone;
 
     private Paint mPaint;
     private Bitmap mBitmap;
@@ -56,6 +58,8 @@ public class GameView extends SurfaceView implements Runnable {
         mPaint = new Paint();
         mPaint.setColor(Color.DKGRAY);
         mPath = new Path();
+
+
     }
 
     /**
@@ -63,6 +67,7 @@ public class GameView extends SurfaceView implements Runnable {
      * All drawing happens here.
      */
     public void run() {
+        pGen = new PairGenerator(mathParameters.getNumDigits());
         int val = 1;
         Canvas canvas;
 
@@ -98,7 +103,7 @@ public class GameView extends SurfaceView implements Runnable {
                 int yPos = (int) ((canvas.getHeight() / 2) - ((mPaint.descent() + mPaint.ascent()) / 2));
                 //((textPaint.descent() + textPaint.ascent()) / 2) is the distance from the baseline to the center.
 
-                canvas.drawText(creaText() , xPos, yPos, mPaint);
+                canvas.drawText(creaText(), xPos, yPos, mPaint);
 
 
                 // Clear the path data structure.
@@ -119,28 +124,56 @@ public class GameView extends SurfaceView implements Runnable {
     }
 
     private Random r = new Random();
-    private String[] ops = {"/", "*", "-", "+"};
+    private String[] ops = {":", "*", "-", "+"};
 
     private String creaText() {
-
-        String op = getOp();
-        for (int i = 0; i < mathParameters.getNumOps(); i++)
-            op += " " + getOp();
-
-        return op.substring(1);
-    }
-
-    private String getOp() {
         int maxVal = 9;
         if (mathParameters.getNumDigits() > 1) maxVal = 99;
-        String op = ops[rand(4)];
-        return op + " " + rand(maxVal);
+
+        String opers[] = new String[mathParameters.getNumOps()];
+        String vals[] = new String[mathParameters.getNumOps() + 1];
+        for (int i = 0; i < mathParameters.getNumOps(); i++) {
+            opers[i] = ops[rand(4)];
+            if (i > 0 && opers[i - 1].equals(":")) opers[i] = "+";
+        }
+
+        Stack<Integer> stack=new Stack<>();
+        boolean div = false;
+        for (int i = 0; i < mathParameters.getNumOps(); i++) {
+
+            if (opers[i].equals(":")) {
+                div = true;
+                pGen.generate();
+                System.out.println(pGen.getV1() + " " + pGen.getV2() + "   " + pGen.getV1() * pGen.getV2());
+                vals[i] = "" + pGen.getV1() * pGen.getV2();
+                stack.push(pGen.getV1());
+          //      i++;
+
+            } else {
+               if( stack.empty())
+                vals[i] = "" + rand(maxVal);
+               else
+                   vals[i] = "" + stack.pop();
+            }
+
+        }
+        if( stack.empty())
+            vals[mathParameters.getNumOps()] = "" + rand(maxVal);
+        else
+            vals[mathParameters.getNumOps()] = "" + stack.pop();
+        String out = "";
+        for (int i = 0; i < mathParameters.getNumOps(); i++) {
+            out += "" + vals[i] + " " + opers[i];
+        }
+        out += vals[mathParameters.getNumOps()];
+
+        return out;
 
     }
+
 
     private int rand(int max) {
         int val = r.nextInt(max);
-        System.out.println(val);
         return val;
     }
 
@@ -162,7 +195,7 @@ public class GameView extends SurfaceView implements Runnable {
         mViewWidth = w;
         mViewHeight = h;
 
-  //      mFlashlightCone = new FlashlightCone(mViewWidth, mViewHeight);
+        //      mFlashlightCone = new FlashlightCone(mViewWidth, mViewHeight);
 
         // Set font size proportional to view size.
         mPaint.setTextSize(mViewHeight / 5);
@@ -256,6 +289,6 @@ public class GameView extends SurfaceView implements Runnable {
     }
 
     public void setActivity(MathActivity mathActivity) {
-        this.activity=mathActivity;
+        this.activity = mathActivity;
     }
 }
