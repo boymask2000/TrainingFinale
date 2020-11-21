@@ -15,11 +15,13 @@ class PairGenerator {
     }
 
     public void generate() {
+        int maxVal=10;
+        if(maxLength==2)maxVal=100;
         while (true) {
             v1 = rand(9)+1;
             v2 = rand(9)+1;
 
-            if (v1 * v2 < maxLength * 10) break;
+            if (v1 * v2 < maxVal) break;
             try {
                 sleep(10);
             } catch (InterruptedException e) {

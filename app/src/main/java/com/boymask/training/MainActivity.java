@@ -99,8 +99,8 @@ public class MainActivity extends AppCompatActivity {
         colori.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ColorsParameterActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(MainActivity.this, ColorsParameterActivity.class);
+//                startActivity(intent);
             }
         });
 
