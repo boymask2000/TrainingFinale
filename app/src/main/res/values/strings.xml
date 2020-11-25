@@ -2,4 +2,5 @@
     <string name="app_name">Training</string>
     <string name="matematica">Matematica</string>
     <string name="colori">Colori</string>
+    <string name="geometry">Figure Geometriche</string>
 </resources>

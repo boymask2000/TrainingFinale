@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.boymask.training.colors.ColorsParameterActivity;
+import com.boymask.training.geometry.GeometryParameterActivity;
 import com.boymask.training.math.MathActivity;
 import com.boymask.training.math.MathParametersActivity;
 
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button matematica;
     private Button colori;
+    private Button geo;
     private Button exit;
 
     @Override
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         matematica = (Button) findViewById(R.id.matematica);
         colori = (Button) findViewById(R.id.colori);
+        geo = (Button) findViewById(R.id.geometry);
         exit = (Button) findViewById(R.id.button_exit);
 
         setButtons();
@@ -99,11 +102,17 @@ public class MainActivity extends AppCompatActivity {
         colori.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, ColorsParameterActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(MainActivity.this, ColorsParameterActivity.class);
+                startActivity(intent);
             }
         });
-
+        geo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, GeometryParameterActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }

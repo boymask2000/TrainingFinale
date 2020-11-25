@@ -21,7 +21,9 @@ import com.boymask.training.R;
 import com.boymask.training.math.MathActivity;
 
 
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 import java.util.Stack;
 
 import static java.lang.Thread.sleep;
@@ -46,6 +48,7 @@ public class GameView extends SurfaceView implements Runnable {
     private SurfaceHolder mSurfaceHolder;
 
     private Random r = new Random();
+    private final String words[] = {"Rosso", "Verde", "Magenta", "Blu", "Grigio"};
 
     private ColorParameters colorParameters;
     private ColorActivity activity;
@@ -72,7 +75,7 @@ public class GameView extends SurfaceView implements Runnable {
      */
     public void run() {
         int colors[] = {Color.RED, Color.GREEN, Color.MAGENTA, Color.BLUE, Color.GRAY};
-        String words[] = {"Rosso", "Verde", "Magenta", "Blu", "Grigio"};
+
         int val = 1;
         Canvas canvas;
 
@@ -110,7 +113,7 @@ public class GameView extends SurfaceView implements Runnable {
                 //((textPaint.descent() + textPaint.ascent()) / 2) is the distance from the baseline to the center.
 
                 mPaint.setTextSize(40);
-
+                wordsSet.clear();
                 for (int i = 0; i < colorParameters.getNumColors(); i++) {
                     mPaint.setColor(colors[r.nextInt(colors.length)]);
                     float x = (canvas.getWidth() / (colorParameters.getNumColors() + 1)) * (i + 1);
@@ -118,7 +121,8 @@ public class GameView extends SurfaceView implements Runnable {
                     canvas.drawCircle(x, y, 150, mPaint);
                     if (colorParameters.isWithWords()) {
                         mPaint.setColor(Color.BLACK);
-                        canvas.drawText(words[r.nextInt(words.length)], x, y, mPaint);
+                   //     canvas.drawText(words[r.nextInt(words.length)], x, y, mPaint);
+                        canvas.drawText(getText() , x, y, mPaint);
                     }
                 }
 
@@ -136,6 +140,19 @@ public class GameView extends SurfaceView implements Runnable {
                     e.printStackTrace();
                 }
 
+            }
+        }
+    }
+
+    private Set<String> wordsSet = new HashSet<>();
+
+    private String getText() {
+
+        while (true) {
+           int v = r.nextInt(words.length);
+            if (!wordsSet.contains(words[v])) {
+                wordsSet.add(words[v]);
+                return words[v];
             }
         }
     }
