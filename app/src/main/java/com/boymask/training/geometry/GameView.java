@@ -187,7 +187,7 @@ public class GameView extends SurfaceView implements Runnable {
         mPaint.setColor(Color.RED);
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeWidth(20);
-        if (fig == Figures.CERCHIO) {
+/*        if (fig == Figures.CERCHIO) {
             canvas.drawCircle(x, y, 150, mPaint);
             return;
         }
@@ -210,6 +210,33 @@ public class GameView extends SurfaceView implements Runnable {
             canvas.drawLine(x, y - 150, x + 150, y+50, mPaint);
             canvas.drawLine(x, y -150, x - 150, y+50, mPaint);
             canvas.drawLine(x - 150, y+50, x + 150, y+50, mPaint);
+        }*/
+
+        float dim=canvas.getWidth()/10;
+
+        if (fig == Figures.CERCHIO) {
+            canvas.drawCircle(x, y, dim, mPaint);
+            return;
+        }
+        if (fig == Figures.QUADRATO) {
+            canvas.drawRect(x - dim, y - dim, x + dim, y + dim, mPaint);
+            return;
+        }
+        if (fig == Figures.RETTANGOLO) {
+            canvas.drawRect(x - dim, y - dim*2/3, x + dim, y + dim*2/3, mPaint);
+            return;
+        }
+        if (fig == Figures.ROMBO) {
+            canvas.drawLine(x, y + dim, (float) (x + dim*0.7), y, mPaint);
+            canvas.drawLine(x, y + dim, (float) (x - dim*0.7), y, mPaint);
+            canvas.drawLine(x, y - dim, (float) (x + dim*0.7), y, mPaint);
+            canvas.drawLine(x, y - dim, (float) (x - dim*0.7), y, mPaint);
+            return;
+        }
+        if (fig == Figures.TRIANGOLO) {
+            canvas.drawLine(x, y - dim, x + dim, y+50, mPaint);
+            canvas.drawLine(x, y -dim, x - dim, y+50, mPaint);
+            canvas.drawLine(x - dim, y+50, x + dim, y+50, mPaint);
         }
 
     }
