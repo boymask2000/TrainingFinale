@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/light"
     android:orientation="vertical"
     tools:context=".math.MathParametersActivity">
 
@@ -12,15 +13,17 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/matematica"
         android:layout_gravity="center_horizontal"
+        android:text="@string/matematica"
+        android:textStyle="bold|italic"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/editTextTextPersonName"
@@ -29,6 +32,7 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:text="Tempo"
+            android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <EditText
@@ -42,7 +46,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/numOperazioni"
@@ -51,6 +56,7 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:text="Num. Operazioni"
+            android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
             tools:layout_editor_absoluteX="16dp" />
 
@@ -65,7 +71,9 @@
                 android:id="@+id/op1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1" />
+                android:text="1"
+                android:checked="true"
+                />
 
             <RadioButton
                 android:id="@+id/op2"
@@ -87,7 +95,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/numCifre"
@@ -96,7 +105,8 @@
 
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Num. Cifre" />
+            android:text="Num. Cifre"
+            android:textStyle="bold"/>
 
         <RadioGroup
             android:id="@+id/radioGroup"
@@ -108,7 +118,8 @@
                 android:id="@+id/radio_cifre1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1" />
+                android:text="1"
+                android:checked="true"/>
 
             <RadioButton
                 android:id="@+id/radio_cifre2"
@@ -123,13 +134,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:backgroundTint="?attr/colorAccent"
         android:text="Inizia" />
 
     <Button
         android:id="@+id/button_exit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="148dp"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="148dp"
         android:text="Esci" />
 </LinearLayout>
