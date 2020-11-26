@@ -48,6 +48,7 @@ public class GameView extends SurfaceView implements Runnable {
     private SurfaceHolder mSurfaceHolder;
 
     private Random r = new Random();
+    private final int colors[] = {Color.RED, Color.GREEN, Color.MAGENTA, Color.BLUE, Color.GRAY};
     private final String words[] = {"Rosso", "Verde", "Magenta", "Blu", "Grigio"};
 
     private ColorParameters colorParameters;
@@ -74,7 +75,7 @@ public class GameView extends SurfaceView implements Runnable {
      * All drawing happens here.
      */
     public void run() {
-        int colors[] = {Color.RED, Color.GREEN, Color.MAGENTA, Color.BLUE, Color.GRAY};
+
 
         int val = 1;
         Canvas canvas;
@@ -111,18 +112,20 @@ public class GameView extends SurfaceView implements Runnable {
                 int xPos = (canvas.getWidth() / 2);
                 int yPos = (int) ((canvas.getHeight() / 2) - ((mPaint.descent() + mPaint.ascent()) / 2));
                 //((textPaint.descent() + textPaint.ascent()) / 2) is the distance from the baseline to the center.
-
+float radius=canvas.getHeight()/5;
                 mPaint.setTextSize(40);
                 wordsSet.clear();
+                colorsSet.clear();
                 for (int i = 0; i < colorParameters.getNumColors(); i++) {
-                    mPaint.setColor(colors[r.nextInt(colors.length)]);
+                    // mPaint.setColor(colors[r.nextInt(colors.length)]);
+                    mPaint.setColor(getColor());
                     float x = (canvas.getWidth() / (colorParameters.getNumColors() + 1)) * (i + 1);
                     float y = canvas.getHeight() / 2;
-                    canvas.drawCircle(x, y, 150, mPaint);
+                    canvas.drawCircle(x, y, radius, mPaint);
                     if (colorParameters.isWithWords()) {
                         mPaint.setColor(Color.BLACK);
-                   //     canvas.drawText(words[r.nextInt(words.length)], x, y, mPaint);
-                        canvas.drawText(getText() , x, y, mPaint);
+                        //     canvas.drawText(words[r.nextInt(words.length)], x, y, mPaint);
+                        canvas.drawText(getText(), x, y, mPaint);
                     }
                 }
 
@@ -145,14 +148,26 @@ public class GameView extends SurfaceView implements Runnable {
     }
 
     private Set<String> wordsSet = new HashSet<>();
+    private Set<Integer> colorsSet = new HashSet<>();
 
     private String getText() {
 
         while (true) {
-           int v = r.nextInt(words.length);
+            int v = r.nextInt(words.length);
             if (!wordsSet.contains(words[v])) {
                 wordsSet.add(words[v]);
                 return words[v];
+            }
+        }
+    }
+
+    private int getColor() {
+
+        while (true) {
+            int v = r.nextInt(colors.length);
+            if (!colorsSet.contains(colors[v])) {
+                colorsSet.add(colors[v]);
+                return colors[v];
             }
         }
     }
@@ -235,29 +250,7 @@ public class GameView extends SurfaceView implements Runnable {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         activity.finish();
-        /*
-        float x = event.getX();
-        float y = event.getY();
 
-        // Invalidate() is inside the case statements because there are
-        // many other motion events, and we don't want to invalidate
-        // the view for those.
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                setUpBitmap();
-                // Set coordinates of flashlight cone.
-                updateFrame((int) x, (int) y);
-                invalidate();
-                break;
-            case MotionEvent.ACTION_MOVE:
-                // Updated coordinates for flashlight cone.
-                updateFrame((int) x, (int) y);
-                invalidate();
-                break;
-            default:
-                // Do nothing.
-        }
-        System.out.println("KKKKKKK");*/
         return true;
     }
 

@@ -103,6 +103,7 @@ public class GameView extends SurfaceView implements Runnable {
 
                 canvas.drawColor(Color.WHITE);
                 wordsSet.clear();
+                figuresSet.clear();
                 for (int i = 0; i < geoParameters.getNumFigures(); i++) {
 
 
@@ -140,7 +141,7 @@ public class GameView extends SurfaceView implements Runnable {
         }
     }
     private Set<Integer> wordsSet = new HashSet<>();
-
+    private Set<Integer> figuresSet = new HashSet<>();
     private String getText() {
 
         while (true) {
@@ -151,8 +152,18 @@ public class GameView extends SurfaceView implements Runnable {
             }
         }
     }
+    private int getFigNum() {
+
+        while (true) {
+            int v = r.nextInt(figures.length);
+            if (!figuresSet.contains(v)) {
+                figuresSet.add(v);
+                return v;
+            }
+        }
+    }
     private void drawFigure(Canvas canvas, float x, float y) {
-        int num = r.nextInt(figures.length);
+        int num = getFigNum();//r.nextInt(figures.length);
         Figures fig = Figures.CERCHIO;
         switch (num) {
             case 0:
@@ -189,10 +200,10 @@ public class GameView extends SurfaceView implements Runnable {
             return;
         }
         if (fig == Figures.ROMBO) {
-            canvas.drawLine(x, y + 150, x + 150, y, mPaint);
-            canvas.drawLine(x, y + 150, x - 150, y, mPaint);
-            canvas.drawLine(x, y - 150, x + 150, y, mPaint);
-            canvas.drawLine(x, y - 150, x - 150, y, mPaint);
+            canvas.drawLine(x, y + 150, x + 130, y, mPaint);
+            canvas.drawLine(x, y + 150, x - 130, y, mPaint);
+            canvas.drawLine(x, y - 150, x + 130, y, mPaint);
+            canvas.drawLine(x, y - 150, x - 130, y, mPaint);
             return;
         }
         if (fig == Figures.TRIANGOLO) {
