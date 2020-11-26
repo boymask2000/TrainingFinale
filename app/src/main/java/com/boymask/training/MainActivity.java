@@ -109,8 +109,8 @@ public class MainActivity extends AppCompatActivity {
         geo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, GeometryParameterActivity.class);
-                startActivity(intent);
+             /*   Intent intent = new Intent(MainActivity.this, GeometryParameterActivity.class);
+                startActivity(intent);*/
             }
         });
 
