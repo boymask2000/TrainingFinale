@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.WindowManager;
 
 import com.boymask.training.R;
 
@@ -31,6 +32,8 @@ public class GeometryActivity extends AppCompatActivity {
         // Android 4.1 and higher simple way to request fullscreen.
         mGameView.setSystemUiVisibility(SYSTEM_UI_FLAG_FULLSCREEN);
         setContentView(mGameView);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
     }
 
     @Override

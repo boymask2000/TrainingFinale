@@ -9,22 +9,17 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
-import android.graphics.Region;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-
 import com.boymask.training.R;
-import com.boymask.training.math.MathActivity;
-
+import com.boymask.training.TextWriter;
 
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
-import java.util.Stack;
 
 import static java.lang.Thread.sleep;
 
@@ -112,20 +107,38 @@ public class GameView extends SurfaceView implements Runnable {
                 int xPos = (canvas.getWidth() / 2);
                 int yPos = (int) ((canvas.getHeight() / 2) - ((mPaint.descent() + mPaint.ascent()) / 2));
                 //((textPaint.descent() + textPaint.ascent()) / 2) is the distance from the baseline to the center.
-float radius=canvas.getHeight()/5;
-                mPaint.setTextSize(40);
+                float radius = canvas.getHeight() / 5;
+                mPaint.setTextSize(180);
                 wordsSet.clear();
                 colorsSet.clear();
-                for (int i = 0; i < colorParameters.getNumColors(); i++) {
-                    // mPaint.setColor(colors[r.nextInt(colors.length)]);
-                    mPaint.setColor(getColor());
-                    float x = (canvas.getWidth() / (colorParameters.getNumColors() + 1)) * (i + 1);
-                    float y = canvas.getHeight() / 2;
-                    canvas.drawCircle(x, y, radius, mPaint);
-                    if (colorParameters.isWithWords()) {
-                        mPaint.setColor(Color.BLACK);
-                        //     canvas.drawText(words[r.nextInt(words.length)], x, y, mPaint);
-                        canvas.drawText(getText(), x, y, mPaint);
+                if (1 > 2) {
+                    for (int i = 0; i < colorParameters.getNumColors(); i++) {
+                        // mPaint.setColor(colors[r.nextInt(colors.length)]);
+                        mPaint.setColor(getColor());
+                        float x = (canvas.getWidth() / (colorParameters.getNumColors() + 1)) * (i + 1);
+                        float y = canvas.getHeight() / 2;
+                        canvas.drawCircle(x, y, radius, mPaint);
+                        if (colorParameters.isWithWords()) {
+                            mPaint.setColor(Color.BLACK);
+                            //     canvas.drawText(words[r.nextInt(words.length)], x, y, mPaint);
+                            canvas.drawText(getText(), x, y, mPaint);
+                        }
+                    }
+                } else {
+                    for (int i = 0; i < colorParameters.getNumColors(); i++) {
+                        // mPaint.setColor(colors[r.nextInt(colors.length)]);
+                        mPaint.setColor(getColor());
+                        float x = (canvas.getWidth() / (colorParameters.getNumColors() + 1)) * (i + 1);
+                        float y = canvas.getHeight() / 2;
+                        float left = (canvas.getWidth() / (colorParameters.getNumColors())) * i;
+                        float top = canvas.getHeight();
+                        float right = (canvas.getWidth() / (colorParameters.getNumColors())) * (i+ 1);
+                        canvas.drawRect(left, top, right, 0,mPaint);//Circle(x, y, radius, mPaint);
+                        if (colorParameters.isWithWords()) {
+                            mPaint.setColor(Color.BLACK);
+                            TextWriter.write(getText(),canvas,i,colorParameters.getNumColors(),mPaint);
+                         //   canvas.drawText(getText(), x, y, mPaint);
+                        }
                     }
                 }
 

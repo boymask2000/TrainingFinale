@@ -8,17 +8,12 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
-import android.graphics.Region;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-
 import com.boymask.training.R;
-import com.boymask.training.math.MathActivity;
-import com.boymask.training.math.MathParameters;
 
 import java.util.Random;
 import java.util.Stack;
@@ -191,7 +186,7 @@ public class GameView extends SurfaceView implements Runnable {
         mViewHeight = h;
 
         // Set font size proportional to view size.
-        mPaint.setTextSize(mViewHeight / 5);
+        mPaint.setTextSize(mViewHeight / 3);
 
         mBitmap = BitmapFactory.decodeResource(
                 mContext.getResources(), R.drawable.ic_launcher_background);

@@ -15,6 +15,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.boymask.training.R;
+import com.boymask.training.TextWriter;
 import com.boymask.training.colors.Figures;
 
 
@@ -95,10 +96,9 @@ public class GameView extends SurfaceView implements Runnable {
                 int yPos = (int) ((canvas.getHeight() / 2) - ((mPaint.descent() + mPaint.ascent()) / 2));
                 //((textPaint.descent() + textPaint.ascent()) / 2) is the distance from the baseline to the center.
 
-                mPaint.setTextSize(40);
+                mPaint.setTextSize(180);
                 mPaint.setFakeBoldText(true);
                 mPaint.setLinearText(true);
-
 
 
                 canvas.drawColor(Color.WHITE);
@@ -118,8 +118,9 @@ public class GameView extends SurfaceView implements Runnable {
                         mPaint.setStrokeWidth(0);
                         mPaint.setStyle(Paint.Style.FILL);
 
-                     //   canvas.drawText(figures[r.nextInt(figures.length)], x, y, mPaint);
-                        canvas.drawText(getText(), x, y, mPaint);
+                        //   canvas.drawText(figures[r.nextInt(figures.length)], x, y, mPaint);
+                        TextWriter.write(getText(),canvas,i,geoParameters.getNumFigures(),mPaint);
+                       // canvas.drawText(getText(), x, y, mPaint);
                     }
                 }
 
@@ -140,8 +141,10 @@ public class GameView extends SurfaceView implements Runnable {
             }
         }
     }
+
     private Set<Integer> wordsSet = new HashSet<>();
     private Set<Integer> figuresSet = new HashSet<>();
+
     private String getText() {
 
         while (true) {
@@ -152,6 +155,7 @@ public class GameView extends SurfaceView implements Runnable {
             }
         }
     }
+
     private int getFigNum() {
 
         while (true) {
@@ -162,6 +166,7 @@ public class GameView extends SurfaceView implements Runnable {
             }
         }
     }
+
     private void drawFigure(Canvas canvas, float x, float y) {
         int num = getFigNum();//r.nextInt(figures.length);
         Figures fig = Figures.CERCHIO;
@@ -212,7 +217,7 @@ public class GameView extends SurfaceView implements Runnable {
             canvas.drawLine(x - 150, y+50, x + 150, y+50, mPaint);
         }*/
 
-        float dim=canvas.getWidth()/10;
+        float dim = canvas.getWidth() / 5;
 
         if (fig == Figures.CERCHIO) {
             canvas.drawCircle(x, y, dim, mPaint);
@@ -223,20 +228,20 @@ public class GameView extends SurfaceView implements Runnable {
             return;
         }
         if (fig == Figures.RETTANGOLO) {
-            canvas.drawRect(x - dim, y - dim*2/3, x + dim, y + dim*2/3, mPaint);
+            canvas.drawRect(x - dim, y - dim * 2 / 3, x + dim, y + dim * 2 / 3, mPaint);
             return;
         }
         if (fig == Figures.ROMBO) {
-            canvas.drawLine(x, y + dim, (float) (x + dim*0.7), y, mPaint);
-            canvas.drawLine(x, y + dim, (float) (x - dim*0.7), y, mPaint);
-            canvas.drawLine(x, y - dim, (float) (x + dim*0.7), y, mPaint);
-            canvas.drawLine(x, y - dim, (float) (x - dim*0.7), y, mPaint);
+            canvas.drawLine(x, y + dim, (float) (x + dim * 0.7), y, mPaint);
+            canvas.drawLine(x, y + dim, (float) (x - dim * 0.7), y, mPaint);
+            canvas.drawLine(x, y - dim, (float) (x + dim * 0.7), y, mPaint);
+            canvas.drawLine(x, y - dim, (float) (x - dim * 0.7), y, mPaint);
             return;
         }
         if (fig == Figures.TRIANGOLO) {
-            canvas.drawLine(x, y - dim, x + dim, y+50, mPaint);
-            canvas.drawLine(x, y -dim, x - dim, y+50, mPaint);
-            canvas.drawLine(x - dim, y+50, x + dim, y+50, mPaint);
+            canvas.drawLine(x, y - dim, x + dim, y + 50, mPaint);
+            canvas.drawLine(x, y - dim, x - dim, y + 50, mPaint);
+            canvas.drawLine(x - dim, y + 50, x + dim, y + 50, mPaint);
         }
 
     }
