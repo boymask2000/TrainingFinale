@@ -34,9 +34,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        if(checkDate()){
+   /*     if(checkDate()){
             alertDialog();
-        }
+        }*/
 
         matematica = (Button) findViewById(R.id.matematica);
         colori = (Button) findViewById(R.id.colori);
